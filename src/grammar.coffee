@@ -75,6 +75,7 @@ grammar =
   ]
 
   Join: [
+    o 'INNER JOIN Table ON Expression',                   -> new Join($3, $5, '', 'INNER')
     o 'JOIN Table ON Expression',                         -> new Join($2, $4)
     o 'LEFT JOIN Table ON Expression',                    -> new Join($3, $5, 'LEFT')
     o 'RIGHT JOIN Table ON Expression',                   -> new Join($3, $5, 'RIGHT')

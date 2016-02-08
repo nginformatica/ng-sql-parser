@@ -381,4 +381,12 @@ describe "SQL Grammar", ->
         FROM `foo`
         WHERE (`bar` = $12)
       """
+  describe "Inner join", ->
+    it "parses inner join without left or right", ->
+      parse('select * from foo inner join x on x = y').toString().should.eql """
+      SELECT *
+        FROM `foo`
+         INNER JOIN `x`
+          ON (`x` = `y`)
+      """
 
