@@ -225,7 +225,7 @@ grammar =
 
   ArgumentList: [
     o 'Expression',                                       -> [$1]
-    o 'ArgumentList SEPARATOR Value',                     -> $1.concat($3)
+    o 'ArgumentList SEPARATOR Expression',                -> $1.concat($3)
   ]
 
   Fields: [

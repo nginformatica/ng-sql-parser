@@ -411,14 +411,3 @@ describe "SQL Grammar", ->
           ELSE 2
         END))
       """
-
-
-    # it "parses case expression", ->
-    #   parse('select * from foo where x = case 1 when 1 then 2 else 2 end').toString().should.eql """
-    #   SELECT *
-    #     FROM `foo`
-    #     WHERE X = CASE 1
-    #       WHEN 1 THEN 2
-    #       ELSE 2
-    #     END
-    #   """
