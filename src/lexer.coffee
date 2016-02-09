@@ -26,7 +26,7 @@ class Lexer
                        @parensToken() or
                        @whitespaceToken() or
                        @literalToken()
-      throw new Error("NOTHING CONSUMED: Stopped at - '#{@chunk.slice(0,30)}'") if bytesConsumed < 1
+      throw new Error("Sintaxe inválida em '#{@chunk.slice(0,30)}'") if bytesConsumed < 1
       i += bytesConsumed
     @token('EOF', '')
     @postProcess()
@@ -91,7 +91,13 @@ class Lexer
     @tokenizeFromWord('ROWS') or
     @tokenizeFromWord('ONLY') or
     @tokenizeFromWord('NEXT') or
-    @tokenizeFromWord('FIRST')
+    @tokenizeFromWord('FIRST') or
+    @tokenizeFromWord('CASE') or
+    @tokenizeFromWord('WHEN') or
+    @tokenizeFromWord('THEN') or
+    @tokenizeFromWord('ELSE') or
+    @tokenizeFromWord('END')
+
 
   dotToken: -> @tokenizeFromWord('DOT', '.')
   operatorToken:    -> @tokenizeFromList('OPERATOR', SQL_OPERATORS)

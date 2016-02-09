@@ -142,6 +142,28 @@ exports.Having = class Having
   constructor: (@conditions) -> null
   toString: -> "HAVING #{@conditions}"
 
+exports.Case = class Case
+  constructor: (@condition, @case, @cases, @defaultCase) -> null
+  toString: ->
+    ret = ["(CASE #{@condition}\n"]
+    ret.push "  #{@case}"
+    ret.push "\n"
+
+    for c in @cases
+      ret.push '  '
+      ret.push c
+      ret.push "\n"
+
+    if @defaultCase
+      ret.push "  ELSE #{@defaultCase}\n"
+
+    ret.push 'END)'
+    ret.join ''
+
+exports.CaseBody = class CaseBody
+  constructor: (@condition, @then) -> null
+  toString: -> "WHEN #{@condition} THEN #{@then}"
+
 exports.Op = class Op
   constructor: (@operation, @left, @right) -> null
   toString: -> "(#{@left} #{@operation.toUpperCase()} #{@right})"

@@ -141,17 +141,28 @@ grammar =
 
 
   Expression: [
-    o 'LEFT_PAREN Expression RIGHT_PAREN',                -> $2
-    o 'Expression MATH Expression',                       -> new Op($2, $1, $3)
-    o 'Expression MATH_MULTI Expression',                 -> new Op($2, $1, $3)
-    o 'Expression OPERATOR Expression',                   -> new Op($2, $1, $3)
-    o 'Expression BETWEEN BetweenExpression',             -> new Op($2, $1, $3)
-    o 'Expression CONDITIONAL Expression',                -> new Op($2, $1, $3)
-    o 'Value SUB_SELECT_OP LEFT_PAREN List RIGHT_PAREN',  -> new Op($2, $1, $4)
-    o 'Value SUB_SELECT_OP SubSelectExpression',          -> new Op($2, $1, $3)
-    o 'SUB_SELECT_UNARY_OP SubSelectExpression',          -> new UnaryOp($1, $2)
+    o 'CASE Expression CaseBody CaseBodies END',                     -> new Case($2, $3, $4)
+    o 'CASE Expression CaseBody CaseBodies ELSE Expression END',     -> new Case($2, $3, $4, $6)
+    o 'LEFT_PAREN Expression RIGHT_PAREN',                           -> $2
+    o 'Expression MATH Expression',                                  -> new Op($2, $1, $3)
+    o 'Expression MATH_MULTI Expression',                            -> new Op($2, $1, $3)
+    o 'Expression OPERATOR Expression',                              -> new Op($2, $1, $3)
+    o 'Expression BETWEEN BetweenExpression',                        -> new Op($2, $1, $3)
+    o 'Expression CONDITIONAL Expression',                           -> new Op($2, $1, $3)
+    o 'Value SUB_SELECT_OP LEFT_PAREN List RIGHT_PAREN',             -> new Op($2, $1, $4)
+    o 'Value SUB_SELECT_OP SubSelectExpression',                     -> new Op($2, $1, $3)
+    o 'SUB_SELECT_UNARY_OP SubSelectExpression',                     -> new UnaryOp($1, $2)
     o 'SubSelectExpression'
     o 'Value'
+  ]
+
+  CaseBodies: [
+    o 'CaseBody'
+    o 'CaseBodies CaseBody',                              -> $1.concat $2
+  ]
+
+  CaseBody: [
+    o 'WHEN Expression THEN Expression',                  -> [new CaseBody($2, $4)]
   ]
 
   BetweenExpression: [
