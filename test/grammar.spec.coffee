@@ -391,7 +391,16 @@ describe "SQL Grammar", ->
       """
 
   describe "Case", ->
-    it "parses development", ->
+    it "parses simple case", ->
+      parse("select * from x where x = case x when 1 then 1 end").toString().should.eql """
+      SELECT *
+        FROM `x`
+        WHERE (`x` = (CASE `x`
+          WHEN 1 THEN 1
+        END))
+      """
+
+    it "parses case with multiple when", ->
       parse("select * from x where x = case x when 1 then 1 when 3 then 3 when 4 then 4 else 2 end").toString().should.eql """
       SELECT *
         FROM `x`

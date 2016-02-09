@@ -143,11 +143,9 @@ exports.Having = class Having
   toString: -> "HAVING #{@conditions}"
 
 exports.Case = class Case
-  constructor: (@condition, @case, @cases, @defaultCase) -> null
+  constructor: (@condition, @cases, @defaultCase) -> null
   toString: ->
     ret = ["(CASE #{@condition}\n"]
-    ret.push "  #{@case}"
-    ret.push "\n"
 
     for c in @cases
       ret.push '  '

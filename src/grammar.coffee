@@ -141,8 +141,8 @@ grammar =
 
 
   Expression: [
-    o 'CASE Expression CaseBody CaseBodies END',                     -> new Case($2, $3, $4)
-    o 'CASE Expression CaseBody CaseBodies ELSE Expression END',     -> new Case($2, $3, $4, $6)
+    o 'CASE Expression CaseBodies END',                              -> new Case($2, $3)
+    o 'CASE Expression CaseBodies ELSE Expression END',              -> new Case($2, $3, $5)
     o 'LEFT_PAREN Expression RIGHT_PAREN',                           -> $2
     o 'Expression MATH Expression',                                  -> new Op($2, $1, $3)
     o 'Expression MATH_MULTI Expression',                            -> new Op($2, $1, $3)
