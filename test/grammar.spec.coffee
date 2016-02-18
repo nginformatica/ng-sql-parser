@@ -411,3 +411,32 @@ describe "SQL Grammar", ->
           ELSE 2
         END))
       """
+
+  describe "Distinct", ->
+    it "parses distinct", ->
+      parse("select distinct a from b").toString().should.eql """
+      SELECT DISTINCT `a`
+        FROM `b`
+      """
+
+  describe "Top", ->
+    it "parsers top selects", ->
+      parse("select top 10 * from x").toString().should.eql """
+      SELECT TOP 10 *
+        FROM `x`
+      """
+
+    it "parses distinct top selects", ->
+      parse("select distinct top 10 * from x").toString().should.eql """
+      SELECT DISTINCT TOP 10 *
+        FROM `x`
+      """
+
+
+
+
+
+
+
+
+

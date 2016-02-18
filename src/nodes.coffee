@@ -2,13 +2,22 @@ indent = (str) ->
   ("  #{line}" for line in str.split("\n")).join("\n")
 
 exports.Select = class Select
-    constructor: (@fields, @source, @distinct=false, @joins=[], @unions=[]) ->
+    constructor: (@fields, @source, @distinct=false, @joins=[], @unions=[], @top) ->
       @order = null
       @group = null
       @where = null
       @limit = null
     toString: ->
-      ret = ["SELECT #{@fields.join(', ')}"]
+      ret = []
+      if @top and @distinct
+        ret = ["SELECT DISTINCT TOP #{@top} #{@fields.join(', ')}"]
+      else if @top
+        ret = ["SELECT TOP #{@top} #{@fields.join(', ')}"]
+      else if @distinct
+        ret = ["SELECT DISTINCT #{@fields.join(', ')}"]
+      else
+        ret = ["SELECT #{@fields.join(', ')}"]
+
       ret.push indent("FROM #{@source}")
       ret.push indent(join.toString()) for join in @joins
       ret.push indent(@where.toString()) if @where

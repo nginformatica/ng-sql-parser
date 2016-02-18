@@ -96,7 +96,8 @@ class Lexer
     @tokenizeFromWord('WHEN') or
     @tokenizeFromWord('THEN') or
     @tokenizeFromWord('ELSE') or
-    @tokenizeFromWord('END')
+    @tokenizeFromWord('END') or
+    @tokenizeFromWord('TOP')
 
 
   dotToken: -> @tokenizeFromWord('DOT', '.')
