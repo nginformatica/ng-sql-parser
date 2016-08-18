@@ -15,6 +15,7 @@
       if (opts == null) {
         opts = {};
       }
+      sql = sql.replace(/--.*\n?/g, '').trim();
       this.sql = sql;
       this.preserveWhitespace = opts.preserveWhitespace || false;
       this.tokens = [];

@@ -1,5 +1,8 @@
 class Lexer
   constructor: (sql, opts={}) ->
+    # Remove any comments before proceeding
+    sql = sql.replace(/--.*\n?/g, '').trim()
+
     @sql = sql
     @preserveWhitespace = opts.preserveWhitespace || false
     @tokens = []

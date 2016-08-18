@@ -1,6 +1,22 @@
 lexer = require('../lib/lexer')
 
 describe "SQL Lexer", ->
+  it "doesn't give a shit about comments", ->
+    tokens = lexer.tokenize("-- this is a comment")
+    tokens.should.eql [
+      ["EOF", "", 1]
+    ]
+
+  it "doesn't give a shit about multiline comments", ->
+    tokens = lexer.tokenize("-- Main\nselect * from bar\n-- other")
+    tokens.should.eql [
+      ["SELECT", "select", 1]
+      ["STAR", "*", 1]
+      ["FROM", "from", 1]
+      ["LITERAL", "bar", 1]
+      ["EOF", "", 1]
+    ]
+
   it "eats select queries", ->
     tokens = lexer.tokenize("select * from my_table")
     tokens.should.eql [
