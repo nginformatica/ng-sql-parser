@@ -9,7 +9,7 @@ Installation
 
 The package is distributed on NPM and can be installed with...
 
-    npm install sql-parser
+    npm install ng-sql-parser
 
 To build from source you'll need to run the following from the root of the project...
 
