@@ -8,11 +8,11 @@ buildParser = ->
       tag
     setInput: (@tokens) -> @pos = 0
     upcomingInput: -> ""
-    
+
   parser.yy = require('./nodes')
-  
+
   return parser
-  
+
 exports.parser = buildParser()
 
-exports.parse = (str) -> buildParser().parse(str)  
+exports.parse = (str) -> buildParser().parse(str)

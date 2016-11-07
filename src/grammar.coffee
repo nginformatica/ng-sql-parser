@@ -220,8 +220,8 @@ grammar =
   ]
 
   UserFunction: [
-    o "LITERAL LEFT_PAREN RIGHT_PAREN",                           -> new FunctionValue($1, null, true)
-    o "LITERAL LEFT_PAREN AggregateArgumentList RIGHT_PAREN",     -> new FunctionValue($1, $3, true)
+    o "Literal LEFT_PAREN RIGHT_PAREN",                       -> new FunctionValue($1, null, true)
+    o "Literal LEFT_PAREN AggregateArgumentList RIGHT_PAREN", -> new FunctionValue($1, $3, true)
   ]
 
   AggregateArgumentList: [
