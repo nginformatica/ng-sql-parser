@@ -102,10 +102,12 @@ exports.BooleanValue = class LiteralValue
 exports.FunctionValue = class FunctionValue
   constructor: (@name, @arguments=null, @udf=false) -> null
   toString: ->
+    name = if @name.constructor.name is 'LiteralValue' then @name.values.join('.').toUpperCase() else @name.toUpperCase()
+
     if @arguments
-      "#{@name.toUpperCase()}(#{@arguments.toString()})"
+      "#{name}(#{@arguments.toString()})"
     else
-      "#{@name.toUpperCase()}()"
+      "#{name}()"
 
 exports.Order = class Order
   constructor: (@orderings, @offset) ->

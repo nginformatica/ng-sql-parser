@@ -432,11 +432,8 @@ describe "SQL Grammar", ->
         FROM `x`
       """
 
-
-
-
-
-
-
-
-
+  describe "Allows function calls separated by dots", ->
+    parse("select dbo.eita() as eita from preula").toString().should.eql """
+    SELECT DBO.EITA() AS `eita`
+      FROM `preula`
+    """
