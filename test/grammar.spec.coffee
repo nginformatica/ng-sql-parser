@@ -437,3 +437,11 @@ describe "SQL Grammar", ->
     SELECT DBO.EITA() AS `eita`
       FROM `preula`
     """
+
+  describe "Allows TOP with joins", ->
+    parse("select top 10 * from x left join y on z").toString().should.eql """
+    SELECT TOP 10 *
+      FROM `x`
+      LEFT JOIN `y`
+        ON `z`
+    """

@@ -42,6 +42,7 @@ grammar =
   ]
 
   SelectClause: [
+    o 'SELECT Top Fields FROM Table Joins',               -> new Select($3, $5, false, $6, [], $2)
     o 'SELECT Top Fields FROM Table',                     -> new Select($3, $5, false, [], [], $2)
     o 'SELECT DISTINCT Top Fields FROM Table',            -> new Select($4, $6, true, [], [], $3)
     o 'SELECT Fields FROM Table',                         -> new Select($2, $4, false)
