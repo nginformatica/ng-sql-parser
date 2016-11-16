@@ -445,3 +445,10 @@ describe "SQL Grammar", ->
       LEFT JOIN `y`
         ON `z`
     """
+
+  describe "Functions can be used in where clause", ->
+    it "parses simple select with function call in from", ->
+        parse("select x from y()").toString().should.eql """
+        SELECT `x`
+          FROM Y()
+        """
