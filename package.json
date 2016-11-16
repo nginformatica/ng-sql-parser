@@ -1,7 +1,7 @@
 {
   "name": "ng-sql-parser",
   "description": "Lexer and Parser for SQL Syntax",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "scripts": {
     "test": "./node_modules/.bin/cake build && ./node_modules/.bin/mocha --require should --compilers coffee:coffee-script/register"
   },
