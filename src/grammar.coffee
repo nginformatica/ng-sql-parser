@@ -249,6 +249,7 @@ grammar =
     o 'STAR',                                             -> new Star()
     o 'Expression',                                       -> new Field($1)
     o 'Expression AS Literal',                            -> new Field($1, $3)
+    o 'Expression Literal',                               -> new Field($1, $2)
   ]
 
 tokens = []
