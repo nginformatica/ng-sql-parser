@@ -366,6 +366,12 @@ describe "SQL Grammar", ->
         FROM `a` AS `b`
       """
 
+    it "parses aliased field", ->
+      parse("""select a b from t""").toString().should.eql """
+        SELECT `a` AS `b`
+          FROM `t`
+      """
+
   describe "STARS", ->
     it "parses stars as multiplication", ->
       parse('SELECT * FROM foo WHERE a = 1*2').toString().should.eql """
@@ -452,3 +458,25 @@ describe "SQL Grammar", ->
         SELECT `x`
           FROM Y()
         """
+
+  describe "WHERE", ->
+    it "parses simple where condition", ->
+      parse("select a from b where a = 10").toString().should.eql """
+        SELECT `a`
+          FROM `b`
+          WHERE (`a` = 10)
+      """
+
+    it "parses simple where condition with in clause", ->
+      parse("select a from b where a in (10, 'ten')").toString().should.eql """
+        SELECT `a`
+          FROM `b`
+          WHERE (`a` IN (10, 'ten'))
+      """
+
+    it "parses where condition with multiple in clauses", ->
+      parse("select value, type from x where (value, type) in ((10, 'ten'), ('number', 'number in full'))").toString().should.eql """
+        SELECT `value`, `type`
+          FROM `x`
+          WHERE (`value` IN (10 'ten') AND (`type` IN ('number', 'number in full')))
+      """
