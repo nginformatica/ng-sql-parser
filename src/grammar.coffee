@@ -99,6 +99,7 @@ grammar =
 
   WhereClause: [
     o 'WHERE Expression',                                 -> new Where($2)
+    o 'WHERE InConditions',                               -> new Where($2)
   ]
 
   LimitClause: [
@@ -166,6 +167,16 @@ grammar =
     o 'SUB_SELECT_UNARY_OP SubSelectExpression',                     -> new UnaryOp($1, $2)
     o 'SubSelectExpression'
     o 'Value'
+  ]
+
+  InConditions: [
+    o 'ExpressionList IN ExpressionList',                            -> new InConditions($1, $3)
+  ]
+
+  ExpressionList: [
+    o 'Expression',                                                  -> [$1]
+    o 'ExpressionList SEPARATOR Expression',                         -> new ExpressionList($1, $3)
+    o 'LEFT_PAREN ExpressionList RIGHT_PAREN',                       -> $2
   ]
 
   CaseBodies: [
