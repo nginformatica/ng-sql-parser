@@ -3,7 +3,8 @@
   "description": "Lexer and Parser for SQL Syntax",
   "version": "0.5.5",
   "scripts": {
-    "test": "./node_modules/.bin/cake build && ./node_modules/.bin/mocha --require should --compilers coffee:coffee-script/register"
+    "test": "cake build && mocha --require should --compilers coffee:coffee-script/register",
+    "build": "cake build"
   },
   "author": {
     "name": "Andy Kent and Marcelo Camargo",

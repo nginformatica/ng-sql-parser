@@ -193,3 +193,13 @@ exports.Star = class Star
   constructor: () -> null
   toString: -> '*'
   star: true
+
+exports.ExpressionList =  class ExpressionList
+  constructor: (@expressions, @expression) -> null
+  toString: ->
+    console.log(@expressions.toString && @expressions.toString())
+    return "(#{@expressions}, #{@expression})"
+
+exports.InConditions = class InConditions
+  constructor: (@expression, @conditions) -> null
+  toString: -> "(#{@expression} IN #{@conditions})"
